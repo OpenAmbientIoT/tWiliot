@@ -95,9 +95,11 @@ class wiliot_client:
         offline_assets = []
         
         for asset in assets:
-            last_update = str(asset.get("lastUpdatedAt"))
+            last_update = asset.get("lastUpdatedAt")
             if not last_update:
                 raise ValueError("Malformed asset!  Expected field \"lastUpdatedAt\" missing.")
+            else:
+                last_update = str(last_update)
             if parse(last_update).timestamp() < parse(max_downtime).timestamp():
                 downtime = str(parse("now") - parse(last_update))
                 offline_assets.append({
