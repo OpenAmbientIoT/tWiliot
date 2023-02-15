@@ -25,6 +25,8 @@ auth = "TWILIO_AUTH_KEY"
 number = "TWILIO_NUMBER"
 ```
 
+Note that the above TOML file can be expanded to work with multiple projects at once!
+
 You can use a free trial account of Twilio to send free SMS messages--so long as you are "local" with respect to your provisioned Twilio phone number and you don't mind a prefix for all sent SMS messages reminding you of your trial status.
 
 Twilio account registration happens [here](https://www.twilio.com/try-twilio).
@@ -38,11 +40,13 @@ Once installed and your TOML file is set up correctly, you can run the following
 ```
 from twilio import wiliot_client
 
-config_path = "~/config.toml"
+config_path = "config.toml"
 your_phone_number = "+1XXXXXXXXXX"
 
 wc = wiliot_client()
 wc.alert_assets(config=config_path, to=your_phone_number, alert_healthy=True)
 ```
+
+The module will attempt to load the provided config file from your local repository followed by your system home directory; if saved in another location, simply provide an absolute path.
 
 There are a number of settings you can configure, but the above is a sufficient demo of Wiliot with Twilio, aka tWiliot.
