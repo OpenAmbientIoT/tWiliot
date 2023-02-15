@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools>=61.0", "twilio>=7.16.2", "wiliot-api>=4.0.2", "tomli>=2.0.1", "dateparser>=1.1.7"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "twiliot"
+version = "0.1"
+description = "Classes to drive SMS alerting based on Wiliot API calls"
+readme = "README.md"
+requires-python = ">=3.7"
