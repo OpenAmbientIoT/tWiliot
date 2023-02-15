@@ -97,7 +97,8 @@ class wiliot_client:
         for asset in assets:
             last_update = asset.get("lastUpdatedAt")
             if not last_update:
-                raise ValueError("Malformed asset!  Expected field \"lastUpdatedAt\" missing.")
+                logging.warn(f"Malformed asset!  Expected field \"lastUpdatedAt\" missing for asset {asset.get('id')}.")
+                continue
             else:
                 last_update = str(last_update)
             if parse(last_update).timestamp() < parse(max_downtime).timestamp():
@@ -195,9 +196,6 @@ class twilio_client:
         try:
             message = message._properties
         except:
-            # TODO: Check why this error pops.
-            import IPython
-            IPython.embed()
             raise ValueError("Malformed SMS output object!  Expected '_properties' field.")
 
         out = {key: message.get(key) for key in message.keys() if not key=='subresources_uris'}
